@@ -1,0 +1,6 @@
+couriersrs 0.1.1
+================
+
+Fixed handling of empty sender addresses in forward operation mode.
+couriersrs did not accept such mails in version 0.1.0. They are now
+forwarded by keeping the empty sender address.

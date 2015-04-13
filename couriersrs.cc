@@ -230,7 +230,7 @@ int main(int argc, char const** argv) {
     // forward or reverse operation?
     if (!reverse) {
 	// check addresses are present
-	if (!sender || !sender[0]) {
+	if (!sender) {
 	    std::cout << N_("Sender address could not be determined.") << std::endl;
 	    return 1;
 	}
@@ -247,12 +247,17 @@ int main(int argc, char const** argv) {
 	size_t buffer_size = std::string(sender).length()+std::string(srsdomain).length()+65;
 	char *buffer = new char[buffer_size];
 
-	// rewrite address
-	ret = srs_forward(srs, buffer, buffer_size, sender, srsdomain);
-	if (ret != SRS_SUCCESS) {
-	    delete buffer;
-	    std::cout << N_("Could not rewrite address in forward mode: ") << srs_strerror(ret) << std::endl;
-	    return 1;
+	// empty sender address? (bounce mail)
+	if (!sender[0]) {
+	    buffer[0] = 0;
+	} else {
+	    // rewrite address
+	    ret = srs_forward(srs, buffer, buffer_size, sender, srsdomain);
+	    if (ret != SRS_SUCCESS) {
+		delete buffer;
+		std::cout << N_("Could not rewrite address in forward mode: ") << srs_strerror(ret) << std::endl;
+		return 1;
+	    }
 	}
 
 	// Create 'Delivered-To' header
