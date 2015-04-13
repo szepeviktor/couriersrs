@@ -1,0 +1,129 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Matthias Wimmer
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-03-17 15:29+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: couriersrs.cc:44
+msgid "Error creating pipe: "
+msgstr ""
+
+#: couriersrs.cc:53
+msgid "Error forking process: "
+msgstr ""
+
+#: couriersrs.cc:96
+msgid "Error in sendmail coprocess"
+msgstr ""
+
+#: couriersrs.cc:120
+msgid "print server version"
+msgstr ""
+
+#: couriersrs.cc:121
+msgid "use this as the secret"
+msgstr ""
+
+#: couriersrs.cc:122
+msgid "load SRS secret from a file"
+msgstr ""
+
+#: couriersrs.cc:123
+msgid "address separator character"
+msgstr ""
+
+#: couriersrs.cc:124
+msgid "disable SRS forward rewriting"
+msgstr ""
+
+#: couriersrs.cc:125
+msgid "disable SRS reverse rewriting"
+msgstr ""
+
+#: couriersrs.cc:126
+msgid "do reverse instead of forward transformation"
+msgstr ""
+
+#: couriersrs.cc:127
+msgid "overwrite sender address"
+msgstr ""
+
+#: couriersrs.cc:128
+msgid "overwrite recipient address"
+msgstr ""
+
+#: couriersrs.cc:129
+msgid "overwrite domain to build SRS addresses"
+msgstr ""
+
+#: couriersrs.cc:130
+msgid "sendmail executable to use"
+msgstr ""
+
+#: couriersrs.cc:153
+msgid "No destination address given."
+msgstr ""
+
+#: couriersrs.cc:161
+msgid "Invalid argument: "
+msgstr ""
+
+#: couriersrs.cc:168
+msgid " version "
+msgstr ""
+
+#: couriersrs.cc:169
+msgid "Default location of the SRS secret file is: "
+msgstr ""
+
+#: couriersrs.cc:188
+msgid "Could not open secret file: "
+msgstr ""
+
+#: couriersrs.cc:196
+msgid "Could not read secret from file: "
+msgstr ""
+
+#: couriersrs.cc:207
+msgid "Address separator must be exactly one character."
+msgstr ""
+
+#: couriersrs.cc:212
+msgid "Could not set separator character: "
+msgstr ""
+
+#: couriersrs.cc:219
+msgid "Could not set the noforward flag: "
+msgstr ""
+
+#: couriersrs.cc:226
+msgid "Could not set the noreverse flag: "
+msgstr ""
+
+#: couriersrs.cc:234
+msgid "Sender address could not be determined."
+msgstr ""
+
+#: couriersrs.cc:238 couriersrs.cc:275
+msgid "Recipient address could not be determined."
+msgstr ""
+
+#: couriersrs.cc:242
+msgid "Domain to build SRS address could not be determined."
+msgstr ""
+
+#: couriersrs.cc:254
+msgid "Could not rewrite address in forward mode: "
+msgstr ""
