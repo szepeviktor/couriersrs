@@ -1,8 +1,9 @@
 AC_PREREQ(2.50)
 
 AC_INIT(couriersrs.h)
-AM_INIT_AUTOMAKE(couriersrs,0.1.1)
+AM_INIT_AUTOMAKE(couriersrs,0.1.2)
 AM_CONFIG_HEADER(config.h)
+AC_CONFIG_MACRO_DIR([m4])
 AC_LANG(C++)
 AC_GNU_SOURCE
 
@@ -23,9 +24,6 @@ AC_PROG_LIBTOOL
 AC_SUBST(LIBTOOL_DEPS)
 
 AC_SUBST([localedir], ['${datadir}/locale'])
-
-dnl use libtool to compile checks (particularly lib checks), mostly so we don't have to worry about how/if the os supports -R
-ac_link="${SHELL} ${srcdir}/libtool --mode=link $ac_link"
 
 dnl headers we need
 AC_HEADER_STDC
