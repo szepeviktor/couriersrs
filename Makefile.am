@@ -1,15 +1,8 @@
-SUBDIRS = intl m4 po 
+SUBDIRS = libsrs2 tools
+EXTRA_DIST = perl python win32 dist debian LICENSE.BSD LICENSE.GPL-2
 
-bin_PROGRAMS = couriersrs
-
-noinst_HEADERS = couriersrs.h
-
-couriersrs_SOURCES = couriersrs.cc
-
-couriersrs_LDFLAGS = @LDFLAGS@
-
-ACLOCAL_AMFLAGS = -I m4
-
-EXTRA_DIST = config.rpath mkinstalldirs
-
-DEFS = -DLOCALEDIR=\"$(localedir)\" @DEFS@
+dist-hook:
+	@for file in $(EXTRA_DIST); do \
+		find $(distdir)/$$file -name .svn | xargs rm -rf; \
+	done
+	rm -f $(distdir)/perl/Makefile.old

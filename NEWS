@@ -1,13 +1,1 @@
-couriersrs 0.1.2
-================
-
-No functional changes. Just including a patch from Hanno Böck
-<hanno@gentoo.org> in configure.ac.
-
-
-couriersrs 0.1.1
-================
-
-Fixed handling of empty sender addresses in forward operation mode.
-couriersrs did not accept such mails in version 0.1.0. They are now
-forwarded by keeping the empty sender address.
+See http://www.libsrs2.org/ for news.

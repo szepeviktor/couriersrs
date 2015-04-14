@@ -1,88 +1,68 @@
-AC_PREREQ(2.50)
+dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(couriersrs.h)
-AM_INIT_AUTOMAKE(couriersrs,0.1.2)
-AM_CONFIG_HEADER(config.h)
-AC_CONFIG_MACRO_DIR([m4])
-AC_LANG(C++)
-AC_GNU_SOURCE
+AC_INIT(libsrs2/srs2.h)
+AM_INIT_AUTOMAKE(libsrs2, 1.0.18)
 
-sinclude(ac-helpers/ac_define_dir.m4)
+dnl Weird Unix variants
+AC_AIX
+AC_MINIX
 
-dnl Check for programs
+dnl Checks for programs.
 AC_PROG_CC
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
-AM_ICONV
-
-AM_GNU_GETTEXT
-AM_GNU_GETTEXT_VERSION(0.14.1)
-ALL_LINGUAS=""
-
-AC_DISABLE_STATIC
+AC_PROG_RANLIB
 AC_PROG_LIBTOOL
-AC_SUBST(LIBTOOL_DEPS)
 
-AC_SUBST([localedir], ['${datadir}/locale'])
+dnl More weird Unix variants
+AC_ISC_POSIX
 
-dnl headers we need
+AC_C_CONST
+AC_C_INLINE
+AC_TYPE_PID_T
+AC_TYPE_SIZE_T
+AC_C_VOLATILE
+AC_C_BIGENDIAN
+AC_C_INLINE
+AC_C_CHAR_UNSIGNED
+AC_CHECK_SIZEOF(int)
+AC_CHECK_SIZEOF(unsigned long)
+
+dnl Checks for header files.
 AC_HEADER_STDC
+AC_CHECK_HEADERS(strings.h time.h sys/time.h sys/types.h unistd.h)
+AC_CHECK_HEADERS(errno.h sys/select.h sys/socket.h stdarg.h getopt.h)
+AC_CHECK_HEADERS(alloca.h)
 
-dnl static builds
-AC_MSG_CHECKING(if static builds enabled)
-AC_ARG_ENABLE(all-static, AC_HELP_STRING([--enable-all-static], [Build static binaries]), all_static=yes, all_static=no)
-if test "x-$all_static" = "x-yes" ; then
-    LDFLAGS="$LDFLAGS -Wl,-static -static"
-fi
-AC_MSG_RESULT($all_static)
+dnl AC_CHECK_HEADER(openssl/ssl.h, , [
+dnl 	echo "OpenSSL is required to build this library."
+dnl 	exit 1;
+dnl ])
 
-AC_MSG_CHECKING(if partial static builds enabled)
-AC_ARG_ENABLE(partial-static, AC_HELP_STRING([--enable-partial-static], [Build partially static binaries]), partial_static=yes, partial_static=no)
-if test "x-$partial_static" = "x-yes" ; then
-    LDFLAGS="$LDFLAGS -Wl,-lc,-static -static"
-fi
-AC_MSG_RESULT($partial_static)
+dnl Checks for libraries.
+dnl Replace `main' with a function in -lcrypto:
+dnl AC_CHECK_LIB(crypto, EVP_sha1, , [
+dnl 	echo "OpenSSL is required to build this library."
+dnl 	exit 1;
+dnl ])
 
-AC_DEFINE_DIR(LOCALSTATEDIR, localstatedir, [base where spool can be found])
+AC_CHECK_LIB(nsl, inet_pton)
+AC_CHECK_LIB(socket, socket)
+AC_CHECK_LIB(resolv, gethostbyname)
 
-dnl check for libsrs2
-AC_ARG_WITH(libsrs2, AC_HELP_STRING([--with-libsrs2=DIR],
-	    [Where to find libsrs2 (required)]),
-	    libsrs2=$withval, libsrs2=yes)
-if test "$libsrs2" != "no"; then
-    if test "$libsrs2" != "yes"; then
-	LDFLAGS="${LDFLAGS} -L$libsrs2/lib -R$libsrs2/lib"
-	CPPFLAGS="${CPPFLAGS} -I$libsrs2/include"
-    fi
-    AC_CHECK_HEADER(srs2.h,
-		    AC_CHECK_LIB(srs2, srs_new,
-				 [libsrs2=yes LIBS="${LIBS} -lsrs2"], libsrs2=no),
-				 libsrs2=no)
-fi
-if test "$libsrs2" != "yes"; then
-    AC_MSG_ERROR([Couldn't find required libsrs2 installation])
-fi
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_C_CONST
+AC_TYPE_SIZE_T
+AC_HEADER_TIME
 
-dnl check for libpopt
-AC_ARG_WITH(libpopt, AC_HELP_STRING([--with-libpopt=DIR],
-	    [Where to find libpopt (required)]),
-	    libpopt=$withval, libpopt=yes)
-if test "$libpopt" != "no"; then
-    if test "$libpopt" != "yes"; then
-	LDFLAGS="${LDFLAGS} -L$libpopt/lib -R$libpopt/lib"
-	CPPFLAGS="${CPPFLAGS} -I$libpopt/include"
-    fi
-    AC_CHECK_HEADER(popt.h,
-		    AC_CHECK_LIB(popt, poptStrerror,
-				 [libpopt=yes LIBS="${LIBS} -lpopt"], libpopt=no),
-				 libpopt=no)
-fi
-if test "$libpopt" != "yes"; then
-    AC_MSG_ERROR([Couldn't find required libpopt installation])
-fi
+dnl Checks for library functions.
+AC_CHECK_FUNCS(strdup strstr)
+dnl Unix versions
+AC_CHECK_FUNCS(alloca strcasecmp strncasecmp)
+dnl Windows versions
+AC_CHECK_FUNCS(_alloca _stricmp _strnicmp)
 
-dnl define where the configuration file is located
-AC_DEFINE_DIR(CONFIG_DIR,sysconfdir,[where the configuration file can be found])
+AC_CHECK_FUNCS(getopt_long)
 
-dnl Create the makefiles
-AC_OUTPUT(Makefile intl/Makefile po/Makefile.in m4/Makefile )
+AM_CONFIG_HEADER(config.h)
+AC_OUTPUT(libsrs2/Makefile tools/Makefile Makefile)
